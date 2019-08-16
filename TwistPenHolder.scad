@@ -13,7 +13,7 @@ module CurvedVase(sides, radius, height)
     // scale gets to 2
     overall_scale=1.5;
     slices=height/4;
-    translate([2.5 * radius, 0, 0]) {
+    translate([4 * radius, 0, 0]) {
         linear_extrude(
             height=height/2,
             twist=twist,
@@ -35,21 +35,20 @@ module CurvedVase(sides, radius, height)
         }
     }
     
-    scales=[1, 1.4, 1.43, 1.45, 1.5];
-    iterations = len(scales) - 1;
+    radii= radius * [1, 1.4, 1.43, 1.45, 1.48, 1.5];
+    iterations = len(radii) - 1;
     for (i  = [0:iterations - 1]) {
-        current_scale = scales[i + 1];
-        previous_scale = scales[i];
-        echo(current_scale);
-        echo(i);
+        echo(i, radii[i], " -> ", radii[i+1]);
+        // Get the scale to go from one radius to the next
+        scale=radii[i+1]/radii[i];
         translate([0, 0, i * (height / (2 * iterations))]) {
             linear_extrude(
                 height=height/(2 * iterations),
                 twist=twist/iterations,
-                scale=current_scale
+                scale=scale
             ) {
                 rotate(-i * (twist / iterations)) {
-                    circle(r=radius*previous_scale, $fn=sides);
+                    circle(r=radii[i], $fn=sides);
                 }
             }
         }
