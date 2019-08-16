@@ -4,7 +4,7 @@
 $fn = 150 ;			// OpenSCAD Resolution
 
 
-CurvedVase(sides=6, radius=15, height=20);
+CurvedVase(sides=6, radius=15, height=30);
 
 //------------------------------------------------------------
 module CurvedVase(sides, radius, height)
