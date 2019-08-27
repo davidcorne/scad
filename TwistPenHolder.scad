@@ -10,7 +10,7 @@ CurvedVase(sides=6, radius=15, height=30);
 module CurvedVase(sides, radius, height)
 {
     twist=360/sides;
-    factors = [1, 1.2, 1.3, 1.35, 1.4, 1.43, 1.45, 1.48, 1.5, 1.5, 1.48, 1.45, 1.43, 1.4, 1.35, 1.3, 1.2, 1];
+    factors = GenerateFactors();
     radii = radius * factors;
     iterations = len(radii) - 1;
     for (i  = [0:iterations - 1]) {
@@ -30,3 +30,5 @@ module CurvedVase(sides, radius, height)
         }
     }
 }
+
+function GenerateFactors() = [1, 1.2, 1.3, 1.35, 1.4, 1.43, 1.45, 1.48, 1.5, 1.5, 1.48, 1.45, 1.43, 1.4, 1.35, 1.3, 1.2, 1];
